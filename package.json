@@ -1,0 +1,13 @@
+{
+  "name": "ably-reactnative",
+  "description": "React-native wrapper for the javascript realtime client library for Ably.io, the realtime messaging service",
+  "version": "0.9.0-beta.2",
+  "dependencies": {
+    "ably": "~0.9.0-beta.2",
+    "react-native-randombytes": "git+https://github.com/ably-forks/react-native-randombytes.git"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:ably/ably-js-reactnative.git"
+  }
+}
