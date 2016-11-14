@@ -24,7 +24,7 @@ For the rest-only library:
 var realtime = require('ably').Rest;
 ```
 
-For older versions of react-native, which do not support the `react-native` automatic entrypoint, you may have to instead do
+For older versions of React Native, which do not support the `react-native` automatic entrypoint, you may have to instead do
 
 ```javascript
 var realtime = require('ably/browser/static/ably-reactnative.js').Realtime
