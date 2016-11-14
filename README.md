@@ -8,7 +8,7 @@ For complete API documentation, see the [ably documentation](https://ably.io/doc
 
 ### Installation from npm
 
-    npm install ably-reactnative
+    npm install ably-react-native
 
 ### Usage
 
