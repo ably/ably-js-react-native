@@ -34,10 +34,19 @@ var realtime = require('ably/browser/static/ably-reactnative.js').Realtime;
 
 (and similarly for Rest)
 
-
 ### API usage, tests, contributing, etc.
 
 See [the ably-js repo](https://github.com/ably/ably-js).
+
+## FAQs
+
+### Is this repo actively maintained?
+
+Yes, this repo typically has very recent commits because this React Native repo doesn't do very much: it's a very thin wrapper around [the ably-js repo](https://github.com/ably/ably-js).
+
+### Does this repo support all platforms supported by React Native?
+
+Yes, as far as we know. If you find any issues, please [raise an issue](https://github.com/ably/ably-js-react-native/issues) or [contact us](https://www.ably.io/contact)
 
 ## License
 
