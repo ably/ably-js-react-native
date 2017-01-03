@@ -42,7 +42,7 @@ See [the ably-js repo](https://github.com/ably/ably-js).
 
 ### Is this repo actively maintained?
 
-Yes, this repo typically has very recent commits because this React Native repo doesn't do very much: it's a very thin wrapper around [the ably-js repo](https://github.com/ably/ably-js).
+Yes, this repo typically has very fwe recent commits because this React Native repo doesn't do very much: it's a very thin wrapper around [the ably-js repo](https://github.com/ably/ably-js).
 
 ### Does this repo support all platforms supported by React Native?
 
