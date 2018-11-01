@@ -14,24 +14,30 @@ For complete API documentation, see the [Ably Realtime documentation](https://ww
 
 ### Usage
 
-For the realtime library:
-
+For the Realtime library:
 ```javascript
-var realtime = require('ably').Realtime;
+import * as Ably from 'ably'
+const realtime = new Ably.Realtime(<options or api key>)
+
+// Or if using a toolchain that doesn't support ES6 module syntax:
+const Ably = require('ably');
+const client = new Ably.Realtime(<options or api key>);
 ```
 
-For the rest-only library:
-
+For the REST-only library:
 ```javascript
-var realtime = require('ably').Rest;
+import * as Ably from 'ably'
+const realtime = new Ably.Rest(<options or api key>)
+
+// Or if using a toolchain that doesn't support ES6 module syntax:
+const Ably = require('ably');
+const client = new Ably.Rest(<options or api key>);
 ```
 
-For older versions of React Native, which do not support the `react-native` automatic entrypoint, you may have to instead do
-
+For very old versions of React Native, which do not support the `react-native` automatic entrypoint, you may have to instead do
 ```javascript
-var realtime = require('ably/browser/static/ably-reactnative.js').Realtime;
+var Ably = require('ably/browser/static/ably-reactnative.js');
 ```
-
 (and similarly for Rest)
 
 ### API usage, tests, contributing, etc.
