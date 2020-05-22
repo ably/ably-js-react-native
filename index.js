@@ -1,23 +1,24 @@
 import Ably from 'ably';
-import { Platform } from 'react-native';
+import invariant from 'assert';
 
-export function configurePush({ token }) {
-  if (Platform.OS === 'android') {
+export function configurePush({ registrationToken, deviceToken, transportType }) {
+  if (transportType === 'fcm') {
+    invariant(typeof registrationToken === 'string', 'options.registrationToken must be a valid string');
     Ably.platform.push._pushDetails = {
-      transportType: 'fcm',
-      registrationToken: token,
+      transportType,
+      registrationToken,
     };
-    return;
-  }
-  if (Platform.OS === 'ios') {
-    Ably.platform.push._pushDetails = {
-      transportType: 'apns',
-      deviceToken: token,
-    };
-    return;
   }
 
-  throw new Error(`Unsupported OS: ${Platform.OS}`);
+  if (transportType === 'apns') {
+    invariant(typeof deviceToken === 'string', 'options.deviceToken must be a valid string');
+    Ably.platform.push._pushDetails = {
+      transportType,
+      deviceToken,
+    };
+  }
+
+  throw new Error(`Unsupported transportType: ${transportType}`);
 }
 
 export default { ...Ably };
