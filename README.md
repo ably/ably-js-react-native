@@ -13,7 +13,9 @@ For complete API documentation, see the [Ably Realtime documentation](https://ww
 
 ### Installation from npm
 
-    npm install ably-react-native
+```
+npm install ably-react-native react-native-randombytes @react-native-community/async-storage
+```
 
 ### Usage
 
