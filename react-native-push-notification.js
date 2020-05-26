@@ -1,8 +1,8 @@
 import * as Ably from 'ably';
-import invariant from 'assert';
 import Observable from 'zen-observable'
 import PushNotification from 'react-native-push-notification'
 import { Platform } from 'react-native';
+import { invariant } from './common';
 
 if (Ably.Platform.push._pushObserver != null) {
   throw new Error(`Ably push notifications already configured with another provider`);
