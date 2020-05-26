@@ -1,3 +1,2 @@
-import Ably from 'ably';
-
-export default { ...Ably };
+// Export unmodified
+module.exports = require('ably');

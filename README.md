@@ -87,9 +87,9 @@ ablyRealtime.push.activate();
 
 useEffect(() => {
     PushNotification.configure({
-        onRegister(token) {
+        onRegister(result) {
             // ... your existing code
-            onRegister(token);
+            onRegister(result.token);
         },
         // ...
     })
