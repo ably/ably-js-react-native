@@ -53,7 +53,7 @@ For `@react-native-firebase/messaging`, add this to your App code:
 
 ```js
 import firebase from '@react-native-firebase/app'
-import 'ably-js-react-native/react-native-firebase'
+import 'ably-react-native/react-native-firebase'
 
 const ablyRealtime = new Ably.Realtime({
     key: '..',
@@ -66,7 +66,7 @@ firebase.initializeApp({...});
 For `push-notification-ios`, add this to your App code:
 
 ```js
-import 'ably-js-react-native/push-notification-ios'
+import 'ably-react-native/push-notification-ios'
 
 const ablyRealtime = new Ably.Realtime({
     key: '..',
@@ -78,7 +78,7 @@ For `react-native-push-notification`, add this to your App code:
 
 ```js
 import PushNotification from 'react-native-push-notification'
-import { onRegister } from 'ably-js-react-native/react-native-push-notification'
+import { onRegister } from 'ably-react-native/react-native-push-notification'
 
 const ablyRealtime = new Ably.Realtime({
     key: '..',
