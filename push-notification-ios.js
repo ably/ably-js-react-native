@@ -1,6 +1,6 @@
 import * as Ably from 'ably';
-import Observable from 'zen-observable'
-import PushNotificationIOS from '@react-native-community/push-notification-ios'
+import Observable from 'zen-observable';
+import PushNotificationIOS from '@react-native-community/push-notification-ios';
 
 if (Ably.Platform.push._pushObserver != null) {
   throw new Error(`Ably push notifications already configured with another provider`);
@@ -9,16 +9,16 @@ if (Ably.Platform.push._pushObserver != null) {
 let deviceToken = null;
 const observers = new Set();
 
-PushNotificationIOS.once('register', _deviceToken => {
+PushNotificationIOS.once('register', (_deviceToken) => {
   deviceToken = _deviceToken;
 
-  observers.forEach(observer => {
+  observers.forEach((observer) => {
     observer.next({ transportType: 'apns', deviceToken });
   });
-})
+});
 
 // Setup the observer
-Ably.Platform.push._pushObserver = new Observable(observer => {
+Ably.Platform.push._pushObserver = new Observable((observer) => {
   observers.add(observer);
 
   if (deviceToken != null) {
@@ -27,8 +27,10 @@ Ably.Platform.push._pushObserver = new Observable(observer => {
 
   return () => {
     observers.delete(observer);
-  }
+  };
 });
 
 // For debugging
-console.log('[ably-react-native] Setting up push notifications integration for @react-native-community/push-notification-ios')
+console.log(
+  '[ably-react-native] Setting up push notifications integration for @react-native-community/push-notification-ios',
+);

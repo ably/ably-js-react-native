@@ -74,22 +74,29 @@ const ablyRealtime = new Ably.Realtime({
 ablyRealtime.push.activate();
 ```
 
-For `react-native-push-notification`, add this to your App code:
+For `react-native-push-notification` (or others), add this to your App code:
 
 ```js
+import { Platform } from 'react-native'
+import { onRegister } from 'ably-react-native/generic'
 import PushNotification from 'react-native-push-notification'
-import { onRegister } from 'ably-react-native/react-native-push-notification'
 
 const ablyRealtime = new Ably.Realtime({
     key: '..',
 });
 ablyRealtime.push.activate();
 
+// Inside your root App component:
 useEffect(() => {
     PushNotification.configure({
-        onRegister(result) {
+        onRegister(arg) {
+            // ... get "token" from arg
             // ... your existing code
-            onRegister(result.token);
+            if (Platform.OS === 'ios') {
+                onRegister({ transportType: 'apns', deviceToken: token });
+            } else if (Platform.OS === 'android') {
+                onRegister({ transportType: 'fcm', registrationToken: token });
+            }
         },
         // ...
     })
