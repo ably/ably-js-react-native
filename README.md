@@ -5,25 +5,23 @@
 
 A React Native client library for [Ably Realtime](https://www.ably.io), a realtime data delivery platform.
 
-This repo is a wrapper for the [ably-js client library](https://github.com/ably/ably-js) which introduces a dependency needed by [React Native](https://facebook.github.io/react-native/). See the [ably-js README](https://github.com/ably/ably-js) for usage details of the [ably-js client library](https://github.com/ably/ably-js). The ably-js library currently targets the [Ably 1.1 client library specification](https://www.ably.io/documentation/client-lib-development-guide/features/). You can jump to the '[Known Limitations](#known-limitations)' section to see the features this client library does not yet support or [view our client library SDKs feature support matrix](https://www.ably.io/download/sdk-feature-support-matrix) to see the list of all the available features.
+This repo is a wrapper for the [ably-js client library](https://github.com/ably/ably-js) which introduces a dependency needed by [React Native](https://facebook.github.io/react-native/). See the [ably-js README](https://github.com/ably/ably-js) for usage details of the [ably-js client library](https://github.com/ably/ably-js). The ably-js library currently targets the [Ably 1.1 client library specification](https://www.ably.io/documentation/client-lib-development-guide/features/). [See our client library SDKs feature support matrix](https://www.ably.io/download/sdk-feature-support-matrix) to see the list of all the available features.
 
 For complete API documentation, see the [Ably Realtime documentation](https://www.ably.io/documentation).
-
-## Known Limitations
-
-The ably-js library currently *does not* support being the [target of a push notification](https://www.ably.io/documentation/general/push#activate) (i.e. web push)
 
 ## How to use this library
 
 ### Installation from npm
 
-    npm install ably-react-native
+```
+npm install ably-react-native react-native-randombytes @react-native-community/async-storage
+```
 
 ### Usage
 
 For the Realtime library:
 ```javascript
-import * as Ably from 'ably'
+import * as Ably from 'ably-react-native'
 const realtime = new Ably.Realtime(<options or api key>)
 
 // Or if using a toolchain that doesn't support ES6 module syntax:
@@ -33,7 +31,7 @@ const client = new Ably.Realtime(<options or api key>);
 
 For the REST-only library:
 ```javascript
-import * as Ably from 'ably'
+import * as Ably from 'ably-react-native'
 const realtime = new Ably.Rest(<options or api key>)
 
 // Or if using a toolchain that doesn't support ES6 module syntax:
@@ -46,6 +44,64 @@ For very old versions of React Native, which do not support the `react-native` a
 var Ably = require('ably/browser/static/ably-reactnative.js');
 ```
 (and similarly for Rest)
+
+### Push Notifications
+
+To keep your React Native application logic simple, this library re-uses existing Push Notification libraries in your Application.
+
+For `@react-native-firebase/messaging`, add this to your App code:
+
+```js
+import firebase from '@react-native-firebase/app'
+import 'ably-react-native/react-native-firebase'
+
+const ablyRealtime = new Ably.Realtime({
+    key: '..',
+});
+ablyRealtime.push.activate();
+
+firebase.initializeApp({...});
+```
+
+For `push-notification-ios`, add this to your App code:
+
+```js
+import 'ably-react-native/push-notification-ios'
+
+const ablyRealtime = new Ably.Realtime({
+    key: '..',
+});
+ablyRealtime.push.activate();
+```
+
+For `react-native-push-notification` (or others), add this to your App code:
+
+```js
+import { Platform } from 'react-native'
+import { onRegister } from 'ably-react-native/generic'
+import PushNotification from 'react-native-push-notification'
+
+const ablyRealtime = new Ably.Realtime({
+    key: '..',
+});
+ablyRealtime.push.activate();
+
+// Inside your root App component:
+useEffect(() => {
+    PushNotification.configure({
+        onRegister(arg) {
+            // ... get "token" from arg
+            // ... your existing code
+            if (Platform.OS === 'ios') {
+                onRegister({ transportType: 'apns', deviceToken: token });
+            } else if (Platform.OS === 'android') {
+                onRegister({ transportType: 'fcm', registrationToken: token });
+            }
+        },
+        // ...
+    })
+}, []);
+```
 
 ### API usage, tests, contributing, etc.
 
