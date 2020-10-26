@@ -33,11 +33,11 @@ const client = new Ably.Realtime(<options or api key>);
 
 For the REST-only library:
 ```javascript
-import * as Ably from 'ably'
+import Ably from 'ably-react-native'
 const realtime = new Ably.Rest(<options or api key>)
 
 // Or if using a toolchain that doesn't support ES6 module syntax:
-const Ably = require('ably');
+const Ably = require('ably-react-native');
 const client = new Ably.Rest(<options or api key>);
 ```
 
@@ -46,6 +46,54 @@ For very old versions of React Native, which do not support the `react-native` a
 var Ably = require('ably/browser/static/ably-reactnative.js');
 ```
 (and similarly for Rest)
+
+## Push notifications
+
+To enable delivery of Ably content via remote push notifications, this package requires the user to install the following peer dependencies:
+
+    yarn add react-native-device-info
+    yarn add react-native-push-notification
+    yarn add @react-native-community/push-notification-ios
+
+#### Android
+
+Follow the *react-native-push-notification* installation instructions [here](https://github.com/zo0r/react-native-push-notification#readme).  Make sure you have:
+
+ * modified your `manifest.xml` file and added the necessary service
+ * modified your project level `build.gradle` and added the gms dependency
+ * modified your app level `build.gradle` and added the google/firebase plugin and implementations
+ * added your credentials file (`google-services.json`) to `android/app`
+
+#### IOS
+
+Follow the *@react-native-community/push-notification-ios* installation instructions [here](https://github.com/react-native-push-notification-ios/push-notification-ios).  Make sure you have modified your `AppDelegate.h` and `AppDelegate.m` files exactly as described and run `cd ios && pod install`.
+
+### Your app
+In your react-native codebase, you will need to listen for the device-supplied token and register it with Ably:
+```javascript
+import Ably from 'ably-react-native'
+import PushNotification from "react-native-push-notification";
+...
+
+  PushNotification.configure({
+    onRegister: async deviceSpecificToken => await Ably.RNPushNotifications.register(ablyConnectionOptions, deviceSpecificToken);
+  });
+
+```
+
+If the call to `register` fails you will need to retry when the cause of the failure is resolved.  
+
+Note: *The device may generate new tokens arbitrarily, and so the `onRegister` callback may happen at any time, not just on app startup.*
+
+To remove a device from Ably push notifications:
+```
+import Ably from 'ably-react-native'
+import PushNotification from "react-native-push-notification";
+...javascript
+
+  Ably.RNPushNotifications.unregister(ablyConnectionOptions)
+
+```
 
 ### API usage, tests, contributing, etc.
 

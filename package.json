@@ -9,5 +9,11 @@
   "repository": {
     "type": "git",
     "url": "git@github.com:ably/ably-js-react-native.git"
+  },
+  "peerDependencies": {
+    "@react-native-community/push-notification-ios": "^1.6.1",
+    "react-native": ">=0.33",
+    "react-native-device-info": "^7.0.2",
+    "react-native-push-notification": "^6.1.2"
   }
 }
