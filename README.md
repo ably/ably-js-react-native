@@ -75,6 +75,7 @@ import Ably from 'ably-react-native'
 import PushNotification from "react-native-push-notification";
 ...
 
+  const ablyConnectionOptions = {key};//your api key or token
   PushNotification.configure({
     onRegister: async deviceSpecificToken => await Ably.RNPushNotifications.register(ablyConnectionOptions, deviceSpecificToken);
   });
@@ -86,11 +87,12 @@ If the call to `register` fails you will need to retry when the cause of the fai
 Note: *The device may generate new tokens arbitrarily, and so the `onRegister` callback may happen at any time, not just on app startup.*
 
 To remove a device from Ably push notifications:
-```
+```javascript
 import Ably from 'ably-react-native'
 import PushNotification from "react-native-push-notification";
-...javascript
+...
 
+  const ablyConnectionOptions = {key};//your api key or token
   Ably.RNPushNotifications.unregister(ablyConnectionOptions)
 
 ```
