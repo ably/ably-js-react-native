@@ -22,23 +22,23 @@ The ably-js library currently *does not* support being the [target of a push not
 ### Usage
 
 For the Realtime library:
-```javascript
+```ts
 import * as Ably from 'ably'
-const realtime = new Ably.Realtime(<options or api key>)
+const realtime = new Ably.Realtime(options: ClientOptions)
 
 // Or if using a toolchain that doesn't support ES6 module syntax:
 const Ably = require('ably');
-const client = new Ably.Realtime(<options or api key>);
+const client = new Ably.Realtime(options: ClientOptions);
 ```
 
 For the REST-only library:
-```javascript
+```ts
 import * as Ably from 'ably'
-const realtime = new Ably.Rest(<options or api key>)
+const realtime = new Ably.Rest(options: ClientOptions)
 
 // Or if using a toolchain that doesn't support ES6 module syntax:
 const Ably = require('ably');
-const client = new Ably.Rest(<options or api key>);
+const client = new Ably.Rest(options: ClientOptions);
 ```
 
 For very old versions of React Native, which do not support the `react-native` automatic entrypoint, you may have to instead do
@@ -55,7 +55,7 @@ See [the ably-js repo](https://github.com/ably/ably-js).
 
 ### Is this repo actively maintained?
 
-Yes, this repo typically has very fwe recent commits because this React Native repo doesn't do very much: it's a very thin wrapper around [the ably-js repo](https://github.com/ably/ably-js).
+Yes, this repo typically has very few recent commits because this React Native repo doesn't do very much: it's a very thin wrapper around [the ably-js repo](https://github.com/ably/ably-js).
 
 ### Does this repo support all platforms supported by React Native?
 
