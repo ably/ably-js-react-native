@@ -1,3 +1,5 @@
+⚠️ **Warning** - This library is now deprecated in favour of the upstream [ably-js](https://github.com/ably/ably-js) repository. If you want to use Ably in a React Native project please use that library instead.
+
 # [Ably](https://www.ably.io)
 
 [![npm version](https://badge.fury.io/js/ably.svg)](https://badge.fury.io/js/ably)
